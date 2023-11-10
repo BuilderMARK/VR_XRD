@@ -33,7 +33,7 @@ public class ApiService : MonoBehaviour
                     string responseData = await response.Content.ReadAsStringAsync();
                     Debug.Log(responseData);
                     MachineData machineData = JsonConvert.DeserializeObject<MachineData>(responseData);
-                    TestApi(machineData); 
+                    //TestApi(machineData); 
                     Debug.Log(machineData.ToString());
                     return machineData;
                 }
@@ -51,7 +51,6 @@ public class ApiService : MonoBehaviour
         }
     }
     
-    // Consider removing after testing
     private void TestApi(MachineData machineData)
     {
         Debug.Log("Machine Name: " + machineData.machineName);
