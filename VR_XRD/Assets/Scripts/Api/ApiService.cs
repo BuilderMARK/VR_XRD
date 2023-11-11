@@ -9,7 +9,7 @@ using Meta.WitAi.Json;
 [UnityEngine.Scripting.Preserve]
 public class ApiService : MonoBehaviour
 {
-    private string apiUrl;
+    private string apiUrl = "http://localhost:5000/getMachine?id=1";
     public string authToken;
 
     private async void Start()
@@ -20,7 +20,6 @@ public class ApiService : MonoBehaviour
 
     public async Task<MachineData> GetMachineData()
     {
-        apiUrl = "http://localhost:5000/getMachine?id=1";
         using (HttpClient client = new HttpClient())
         {
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
@@ -40,6 +39,7 @@ public class ApiService : MonoBehaviour
                 else
                 {
                     Debug.LogError("API Request Error: " + response.ReasonPhrase);
+                    Debug.LogError(response);
                     return null;
                 }
             }
