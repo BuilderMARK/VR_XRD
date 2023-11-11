@@ -8,6 +8,7 @@ public class SimpleSpawner : MonoBehaviour
     public int numToSpawn = 1;
     public float spawnInterval = 1.0f;
     public Vector3 spawnOffset = new Vector3 (0, 0, 0);
+    public bool Running = true;
 
     // Start is called before the first frame update
     void Start()
@@ -17,7 +18,7 @@ public class SimpleSpawner : MonoBehaviour
 
     private IEnumerator Spawner()
     {
-        while (true)
+        while (Running)
         {
             for (int i = 0; i < numToSpawn; i++)
             {

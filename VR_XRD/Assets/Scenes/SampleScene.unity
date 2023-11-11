@@ -2399,6 +2399,7 @@ GameObject:
   - component: {fileID: 791261256}
   - component: {fileID: 791261255}
   - component: {fileID: 791261258}
+  - component: {fileID: 791261259}
   m_Layer: 0
   m_Name: Spawner (1)
   m_TagString: item
@@ -2519,6 +2520,23 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!114 &791261259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 791261253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03d5bda4ee38ce448b105c32ae5d8bb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObjectName: 
+  ObjectInstructions: 
+  objectManipulationType: 0
+  showLaserWhileGrabbed: 0
+  grabbedRotation: {x: 0, y: 0, z: 0, w: 1}
 --- !u!1001 &792842174
 PrefabInstance:
   m_ObjectHideFlags: 0

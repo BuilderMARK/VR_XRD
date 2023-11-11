@@ -18,7 +18,7 @@ public class ApiService : MonoBehaviour
         // Handle machineData if necessary
     }
 
-    private async Task<MachineData> GetMachineData()
+    public async Task<MachineData> GetMachineData()
     {
         apiUrl = "http://localhost:5000/getMachine?id=1";
         using (HttpClient client = new HttpClient())

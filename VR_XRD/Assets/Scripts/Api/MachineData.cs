@@ -15,5 +15,19 @@ public class MachineData : MonoBehaviour
         public string machineName;
         public string description;
         public bool machineRunning;
-    
+
+
+    public MachineData()
+    {
+        statusCodeID = 0;
+        statusDescription = string.Empty;
+        batchNo = 0;
+        machineID = 0;
+        producedItems = 0;
+        startTime = DateTime.MinValue;
+        endTime = DateTime.MinValue;
+        machineName = string.Empty;
+        description = string.Empty;
+        machineRunning = false;
     }
+}
