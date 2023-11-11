@@ -7,13 +7,37 @@ public class SimpleSpawner : MonoBehaviour
     public GameObject SpawnThing;
     public int numToSpawn = 1;
     public float spawnInterval = 1.0f;
-    public Vector3 spawnOffset = new Vector3 (0, 0, 0);
-    public bool Running = true;
+    public Vector3 spawnOffset = new Vector3(0, 0, 0);
+    private bool _running = true;
+    private Coroutine _spawnerCoroutine;
 
-    // Start is called before the first frame update
+    public bool Running //er lavet så det stadig bare er en simpel bool.. dyrk fancy set
+    {
+        get { return _running; }
+        set
+        {
+            _running = value;
+            if (_running)
+            {
+                if (_spawnerCoroutine != null)
+                {
+                    StopCoroutine(_spawnerCoroutine);
+                }
+                _spawnerCoroutine = StartCoroutine(Spawner());
+            }
+            else
+            {
+                if (_spawnerCoroutine != null)
+                {
+                    StopCoroutine(_spawnerCoroutine);
+                }
+            }
+        }
+    }
+
     void Start()
     {
-        StartCoroutine(Spawner());
+        _spawnerCoroutine = StartCoroutine(Spawner());
     }
 
     private IEnumerator Spawner()
