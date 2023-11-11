@@ -8,7 +8,7 @@ public class SimpleSpawner : MonoBehaviour
     public int numToSpawn = 1;
     public float spawnInterval = 1.0f;
     public Vector3 spawnOffset = new Vector3(0, 0, 0);
-    private bool _running = true;
+    private bool _running = false;
     private Coroutine _spawnerCoroutine;
 
     public bool Running //er lavet så det stadig bare er en simpel bool.. dyrk fancy set
