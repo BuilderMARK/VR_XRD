@@ -7,7 +7,7 @@ using Meta.WitAi.Json;
 
 public class ApiService : MonoBehaviour
 {
-    private string apiUrl = "http://localhost:5000/getMachine?id=1";
+    private string apiUrl = "https://via-bp-backend-delegator-bb6352f3951c.herokuapp.com/getMachine?id=1";
     public string authToken;
 
     public async void Start()
