@@ -5,14 +5,12 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Meta.WitAi.Json;
 
-
-[UnityEngine.Scripting.Preserve]
 public class ApiService : MonoBehaviour
 {
     private string apiUrl = "http://localhost:5000/getMachine?id=1";
     public string authToken;
 
-    private async void Start()
+    public async void Start()
     {
         var machineData = await GetMachineData();
         // Handle machineData if necessary
@@ -30,10 +28,9 @@ public class ApiService : MonoBehaviour
                 if (response.IsSuccessStatusCode)
                 {
                     string responseData = await response.Content.ReadAsStringAsync();
-                    Debug.Log(responseData);
+                    Debug.Log("raw responseData" + responseData);
                     MachineData machineData = JsonConvert.DeserializeObject<MachineData>(responseData);
-                    //TestApi(machineData); 
-                    Debug.Log(machineData.ToString());
+                    TestApi(machineData); 
                     return machineData;
                 }
                 else
@@ -53,8 +50,11 @@ public class ApiService : MonoBehaviour
     
     private void TestApi(MachineData machineData)
     {
+        Debug.Log("batchNo: " + machineData.batches[0].batchNo);
+        Debug.Log("endTime " + machineData.batches[0].endTime);
+        Debug.Log("StartTime " + machineData.batches[0].startTime);
         Debug.Log("Machine Name: " + machineData.machineName);
         Debug.Log("Description: " + machineData.description);
-        Debug.Log("Status: " + machineData.statusDescription);
+        Debug.Log("Status: " + machineData.machineRunning);
     }
 }

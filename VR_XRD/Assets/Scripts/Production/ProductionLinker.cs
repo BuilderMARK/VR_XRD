@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,13 +15,14 @@ public class ProductionLinker : MonoBehaviour
 
 
     public bool isRunning = false; //Should be toggable though the machine buttons
+    private float calculateSpawnInterval;
 
 
 
     // Start is called before the first frame update
     void Start()
     {
-        spawner.Running = true;
+        //spawner.Running = true;
         InvokeRepeating("FetchMachine", 1.0f, 2.0f);
         InvokeRepeating("UpdateMachine", 2.0f, 2.0f);
     }
@@ -35,14 +37,37 @@ public class ProductionLinker : MonoBehaviour
     {
         machineDataReffrence = new MachineData();
         machineDataReffrence = await apiService.GetMachineData();
+        Debug.Log("FetchMachine" + machineDataReffrence.batches[0].batchNo);
+    }
+     double  CalculateSpawnInterval()
+      {
+          var startTime = machineDataReffrence.batches[0].startTime;
+    var endTime = machineDataReffrence.batches[0].endTime;
+    var producedItems = machineDataReffrence.batches[0].producedItems;
+    if (producedItems <= 0)
+    {
+        throw new InvalidOperationException("producedItems must be greater than zero.");
+    }
+    TimeSpan interval = endTime - startTime;
+    var totalSeconds = interval.TotalSeconds;
+    var calculatedSpawnInterval = totalSeconds / producedItems;
+    Debug.Log(calculatedSpawnInterval);
+    return calculatedSpawnInterval;
     }
 
 
-    private void UpdateMachine()
+private void UpdateMachine()
     {
-        if (machineDataReffrence == null) return;
-        spawner.numToSpawn = 10;
+        
+        Debug.Log("machineDataReffrence.statusCode.statusDescription" + machineDataReffrence.statusCode.statusDescription);
+        if (machineDataReffrence.statusCode.statusDescription.Equals("Aktiv"))
+        {
+        spawner.numToSpawn = machineDataReffrence.batches[0].producedItems;
         spawner.Running = machineDataReffrence.machineRunning;
+        spawner.spawnInterval = (float)CalculateSpawnInterval();
+
+        }
+       
         //Display function
     
     
