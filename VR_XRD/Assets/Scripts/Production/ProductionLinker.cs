@@ -22,9 +22,22 @@ public class ProductionLinker : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //spawner.Running = true;
-        InvokeRepeating("FetchMachine", 1.0f, 2.0f);
-        InvokeRepeating("UpdateMachine", 2.0f, 2.0f);
+        ToggleRunning(isRunning);
+    }
+
+    public void ToggleRunning(bool run)
+    {
+        isRunning = run;
+        if (isRunning)
+        {
+            InvokeRepeating("FetchMachine", 1.0f, 2.0f);
+            InvokeRepeating("UpdateMachine", 2.0f, 2.0f);
+        }
+        else
+        {
+            CancelInvoke("FetchMachine");
+            CancelInvoke("UpdateMachine");
+        }
     }
 
     // Update is called once per frame
