@@ -1,9 +1,13 @@
 using UnityEngine;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Meta.WitAi.Json;
+using Oculus.Platform;
+using UnityEngine.Networking;
 
 public class ApiService : MonoBehaviour
 {
@@ -12,12 +16,42 @@ public class ApiService : MonoBehaviour
 
     public async void Start()
     {
-        var machineData = await GetMachineData();
+        //var machineData = await GetMachineData();
         // Handle machineData if necessary
     }
 
+    public IEnumerator GetMachineData1(Action<MachineData> callback)
+    {
+        Debug.Log("API has been called from the API service");
+
+        using (UnityWebRequest www = UnityWebRequest.Get(apiUrl))
+        {
+            www.SetRequestHeader("Authorization", "Bearer " + authToken);
+
+            yield return www.SendWebRequest();
+
+            if (www.result == UnityWebRequest.Result.Success)
+            {
+                string responseData = www.downloadHandler.text;
+                Debug.Log("Raw responseData: " + responseData);
+
+                MachineData machineData = JsonConvert.DeserializeObject<MachineData>(responseData);
+                TestApi(machineData);
+
+                // Handle the data or return it as needed.'
+                callback(machineData);
+            }
+            else
+            {
+                Debug.LogError("API Request Error: " + www.error);
+                Debug.LogError(www);
+            }
+        }
+    }
+    
     public async Task<MachineData> GetMachineData()
     {
+        Debug.Log("TAG API ER KALDT FRA API SERVICE");
         using (HttpClient client = new HttpClient())
         {
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
@@ -35,14 +69,14 @@ public class ApiService : MonoBehaviour
                 }
                 else
                 {
-                    Debug.LogError("API Request Error: " + response.ReasonPhrase);
+                    Debug.LogError("TAG API Request Error: " + response.ReasonPhrase);
                     Debug.LogError(response);
                     return null;
                 }
             }
             catch (Exception ex)
             {
-                Debug.LogError("API Request Exception: " + ex.Message);
+                Debug.LogError("TAG API Request Exception: " + ex.Message);
                 return null;
             }
         }
@@ -50,11 +84,11 @@ public class ApiService : MonoBehaviour
     
     private void TestApi(MachineData machineData)
     {
-        Debug.Log("batchNo: " + machineData.batches[0].batchNo);
-        Debug.Log("endTime " + machineData.batches[0].endTime);
-        Debug.Log("StartTime " + machineData.batches[0].startTime);
-        Debug.Log("Machine Name: " + machineData.machineName);
-        Debug.Log("Description: " + machineData.description);
-        Debug.Log("Status: " + machineData.machineRunning);
+        Debug.Log("TAG  batchNo: " + machineData.batches[0].batchNo);
+        Debug.Log("TAG endTime " + machineData.batches[0].endTime);
+        Debug.Log("TAG StartTime " + machineData.batches[0].startTime);
+        Debug.Log("TAG Machine Name: " + machineData.machineName);
+        Debug.Log("TAG Description: " + machineData.description);
+        Debug.Log("TAG Status: " + machineData.machineRunning);
     }
 }

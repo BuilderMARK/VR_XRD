@@ -10,8 +10,11 @@ public class ProductionLinker : MonoBehaviour
     public ApiService apiService;
     public SimpleSpawner spawner;
     public DisplayScript display;
+    private int test = 1;
+    private bool isInvoking = false; //New variable to track InvokeRepeating
 
-    private MachineData machineDataReffrence;
+
+    private MachineData machineDataReffrence = new MachineData();
 
 
     public bool isRunning = false; //Should be toggable though the machine buttons
@@ -23,6 +26,7 @@ public class ProductionLinker : MonoBehaviour
     void Start()
     {
         ToggleRunning(isRunning);
+        
     }
 
     public void ToggleRunning(bool run)
@@ -30,13 +34,20 @@ public class ProductionLinker : MonoBehaviour
         isRunning = run;
         if (isRunning)
         {
-            InvokeRepeating("FetchMachine", 1.0f, 2.0f);
-            InvokeRepeating("UpdateMachine", 2.0f, 2.0f);
+            if (!isInvoking) //Check if InvokeRepeating has been called
+            {
+                StartCoroutine(FetchMachine());
+                //InvokeRepeating("FetchMachine", 1.0f, 3.0f);
+                InvokeRepeating("UpdateMachine", 2.0f, 2.0f);
+                isInvoking = true; //Set isInvoking to true after calling InvokeRepeating
+            }
         }
         else
         {
-            CancelInvoke("FetchMachine");
+            StopCoroutine(FetchMachine());
+            //CancelInvoke("FetchMachine");
             CancelInvoke("UpdateMachine");
+            isInvoking = false; //Set isInvoking back to false after calling CancelInvoke
         }
     }
 
@@ -46,16 +57,22 @@ public class ProductionLinker : MonoBehaviour
         
     }
 
-    private async void FetchMachine()
+    private IEnumerator FetchMachine()
     {
-        machineDataReffrence = new MachineData();
-        machineDataReffrence = await apiService.GetMachineData();
-        Debug.Log("FetchMachine" + machineDataReffrence.batches[0].batchNo);
+        while(isRunning){
+            machineDataReffrence = new MachineData();
+            yield return StartCoroutine(apiService.GetMachineData1((MachineData data) =>
+            {
+                machineDataReffrence = data;
+                Debug.Log(data.batches);  
+            }));
+            yield return new WaitForSecondsRealtime(30);
+        }
     }
-     double  CalculateSpawnInterval()
+     private double CalculateSpawnInterval()
       {
           var startTime = machineDataReffrence.batches[0].startTime;
-    var endTime = machineDataReffrence.batches[0].endTime;
+            var endTime = machineDataReffrence.batches[0].endTime;
     var producedItems = machineDataReffrence.batches[0].producedItems;
     if (producedItems <= 0)
     {
@@ -71,13 +88,19 @@ public class ProductionLinker : MonoBehaviour
 
 private void UpdateMachine()
     {
-        
-        Debug.Log("machineDataReffrence.statusCode.statusDescription" + machineDataReffrence.statusCode.statusDescription);
+        if (machineDataReffrence != null && machineDataReffrence.statusCode != null)
+        {
+        Debug.Log("TAG machineDataReffrence.statusCode.statusDescription" + machineDataReffrence.statusCode.statusDescription);
         if (machineDataReffrence.statusCode.statusDescription.Equals("Aktiv"))
         {
         spawner.numToSpawn = machineDataReffrence.batches[0].producedItems;
-        spawner.Running = machineDataReffrence.machineRunning;
+        spawner.ToggleRunning(machineDataReffrence.machineRunning);
         spawner.spawnInterval = (float)CalculateSpawnInterval();
+        }
+        else
+        {
+            Debug.Log("TAG MachineDataReffrence is null");
+        }
 
         }
        

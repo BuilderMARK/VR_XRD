@@ -8,8 +8,8 @@ public class HandPressable : MonoBehaviour
     public OVRInput.Controller controller;
     public float distanceThreshold = 0.1f;
 
-    public ProductionLinker productionLinker; //Maybe rewrite this logic? SKal bare bruges til at gøre x når man trykker
-    public bool isStart; //Bare den funktion der skal kører på scriptet over... Ie. samme handpressable script til begge start stop
+    public ProductionLinker productionLinker; //Maybe rewrite this logic? SKal bare bruges til at gÃ¸re x nÃ¥r man trykker
+    public bool isStart; //Bare den funktion der skal kÃ¸rer pÃ¥ scriptet over... Ie. samme handpressable script til begge start stop
 
     void Update()
     {
@@ -18,9 +18,10 @@ public class HandPressable : MonoBehaviour
 
         if (Vector3.Distance(handPosition, buttonPosition) < distanceThreshold)
         {
-            Debug.Log("Button pressed");
+            Debug.Log("TAG Button pressed");
             if (isStart)
             {
+                
                 productionLinker.ToggleRunning(true);
             } else
             {

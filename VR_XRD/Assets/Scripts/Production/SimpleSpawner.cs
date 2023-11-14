@@ -8,31 +8,24 @@ public class SimpleSpawner : MonoBehaviour
     public int numToSpawn = 1;
     public float spawnInterval = 1.0f;
     public Vector3 spawnOffset = new Vector3(0, 0, 0);
-    private bool _running = false;
+    public bool isRunning = false;
     private Coroutine _spawnerCoroutine;
 
-    public bool Running //er lavet så det stadig bare er en simpel bool.. dyrk fancy set
+    public bool ToggleRunning(bool run)
     {
-        get { return _running; }
-        set
+        Debug.Log("TAG ToggleRunning");
+        isRunning = run;
+        if (isRunning)
         {
-            _running = value;
-            if (_running)
-            {
-                if (_spawnerCoroutine != null)
-                {
-                    StopCoroutine(_spawnerCoroutine);
-                }
-                _spawnerCoroutine = StartCoroutine(Spawner());
-            }
-            else
-            {
-                if (_spawnerCoroutine != null)
-                {
-                    StopCoroutine(_spawnerCoroutine);
-                }
-            }
+            Debug.Log("TAG Inside toggle" + isRunning);
+            StartCoroutine(Spawner());
         }
+        else
+        {
+            StopCoroutine(Spawner());
+        }
+
+        return isRunning;
     }
 
     void Start()
@@ -42,7 +35,7 @@ public class SimpleSpawner : MonoBehaviour
 
     private IEnumerator Spawner()
     {
-        while (Running)
+        while (isRunning)
         {
             for (int i = 0; i < numToSpawn; i++)
             {
