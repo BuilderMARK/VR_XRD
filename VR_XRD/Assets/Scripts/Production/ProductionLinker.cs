@@ -14,7 +14,7 @@ public class ProductionLinker : MonoBehaviour
     private bool isInvoking = false; //New variable to track InvokeRepeating
 
 
-    private MachineData machineDataReffrence = new MachineData();
+    private MachineData machineDataReffrence = null;
 
 
     public bool isRunning = false; //Should be toggable though the machine buttons
@@ -110,4 +110,7 @@ private void UpdateMachine()
     
     }
 
+    public MachineData GetMachineData() {
+        return machineDataReffrence;
+    }
 }
