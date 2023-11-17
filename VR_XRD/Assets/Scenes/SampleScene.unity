@@ -175,6 +175,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7910112652744618938, guid: 2af7205b1101fc5408efb4fe9fe7fb66, type: 3}
+      propertyPath: isVisible
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7910112652744618938, guid: 2af7205b1101fc5408efb4fe9fe7fb66, type: 3}
+      propertyPath: OnButtonPressed.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7910112652744618938, guid: 2af7205b1101fc5408efb4fe9fe7fb66, type: 3}
+      propertyPath: OnButtonPressed.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1968474650}
+    - target: {fileID: 7910112652744618938, guid: 2af7205b1101fc5408efb4fe9fe7fb66, type: 3}
+      propertyPath: OnButtonPressed.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7910112652744618938, guid: 2af7205b1101fc5408efb4fe9fe7fb66, type: 3}
+      propertyPath: OnButtonPressed.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: set_enabled
+      objectReference: {fileID: 0}
+    - target: {fileID: 7910112652744618938, guid: 2af7205b1101fc5408efb4fe9fe7fb66, type: 3}
+      propertyPath: OnButtonPressed.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.Behaviour, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7910112652744618938, guid: 2af7205b1101fc5408efb4fe9fe7fb66, type: 3}
+      propertyPath: OnButtonPressed.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7863026514392646934, guid: 2af7205b1101fc5408efb4fe9fe7fb66, type: 3}
     m_RemovedGameObjects: []
@@ -1407,7 +1435,7 @@ MonoBehaviour:
   OnButtonPressed:
     m_PersistentCalls:
       m_Calls: []
-  isStart: 1
+  isStart: 0
 --- !u!65 &475775474
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1923,6 +1951,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tag: item
+--- !u!114 &554218049 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7863026514392646934, guid: 2af7205b1101fc5408efb4fe9fe7fb66, type: 3}
+  m_PrefabInstance: {fileID: 7787113387985934026}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fd489673cc137248a0d3638d77d0361, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &613483617
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2017,6 +2056,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5343105448359487696, guid: 2af7205b1101fc5408efb4fe9fe7fb66, type: 3}
   m_PrefabInstance: {fileID: 7787113387985934026}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &614055425 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7910112652744618938, guid: 2af7205b1101fc5408efb4fe9fe7fb66, type: 3}
+  m_PrefabInstance: {fileID: 7787113387985934026}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db65942638d9485449185789eb4dd001, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &657763769
 GameObject:
   m_ObjectHideFlags: 0
@@ -3522,19 +3572,19 @@ MonoBehaviour:
   OnButtonPressed:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 614055425}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  isStart: 1
+  isStart: 0
 --- !u!65 &1185006502
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5749,6 +5799,38 @@ PrefabInstance:
     - target: {fileID: 7910112652744618938, guid: 2af7205b1101fc5408efb4fe9fe7fb66, type: 3}
       propertyPath: isVisible
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7910112652744618938, guid: 2af7205b1101fc5408efb4fe9fe7fb66, type: 3}
+      propertyPath: OnButtonPressed.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7910112652744618938, guid: 2af7205b1101fc5408efb4fe9fe7fb66, type: 3}
+      propertyPath: OnButtonPressed.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7910112652744618938, guid: 2af7205b1101fc5408efb4fe9fe7fb66, type: 3}
+      propertyPath: OnButtonPressed.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 554218049}
+    - target: {fileID: 7910112652744618938, guid: 2af7205b1101fc5408efb4fe9fe7fb66, type: 3}
+      propertyPath: OnButtonPressed.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7910112652744618938, guid: 2af7205b1101fc5408efb4fe9fe7fb66, type: 3}
+      propertyPath: OnButtonPressed.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: set_enabled
+      objectReference: {fileID: 0}
+    - target: {fileID: 7910112652744618938, guid: 2af7205b1101fc5408efb4fe9fe7fb66, type: 3}
+      propertyPath: OnButtonPressed.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.Behaviour, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7910112652744618938, guid: 2af7205b1101fc5408efb4fe9fe7fb66, type: 3}
+      propertyPath: OnButtonPressed.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7910112652744618938, guid: 2af7205b1101fc5408efb4fe9fe7fb66, type: 3}
+      propertyPath: OnButtonPressed.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

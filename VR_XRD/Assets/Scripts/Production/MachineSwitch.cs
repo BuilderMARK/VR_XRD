@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class MachineSwitch : MonoBehaviour
 {
     public GameObject targetObject;
     public bool isVisible;
+
+    public UnityEvent<bool> OnButtonPressed;
 
     void Update()
     {
@@ -25,5 +28,6 @@ public class MachineSwitch : MonoBehaviour
     public void ToggleSwitch()
     {
         isVisible = !isVisible;
+        OnButtonPressed?.Invoke(isVisible);
     }
 }
