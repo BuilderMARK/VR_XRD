@@ -4,10 +4,11 @@ public class MaterialChanger : MonoBehaviour
 {
     public Material newMaterial;
     public string targetTag = "item";
+    public bool toggle = true;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag(targetTag))
+        if (toggle && other.gameObject.CompareTag(targetTag))
         {
             MeshRenderer renderer = other.gameObject.GetComponent<MeshRenderer>();
             if (renderer != null)
