@@ -22,7 +22,8 @@ public class SimpleSpawner : MonoBehaviour
         }
         else
         {
-            StopCoroutine(_spawnerCoroutine);
+            if(_spawnerCoroutine != null)
+                StopCoroutine(_spawnerCoroutine);
         }
     }
 
