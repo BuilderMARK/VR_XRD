@@ -9,7 +9,11 @@ public class MachineSwitch : MonoBehaviour
     public bool isVisible;
 
     public UnityEvent<bool> OnButtonPressed;
-
+    
+    //Bad manners sku have brugt interface her'
+    public MaterialChanger MaterialChanger;
+    public PrefabChanger PrefabChanger;
+        
     void Update()
     {
         if (targetObject != null)
@@ -20,6 +24,7 @@ public class MachineSwitch : MonoBehaviour
                 if (renderer != null)
                 {
                     renderer.enabled = isVisible;
+                    
                 }
             }
         }
@@ -28,6 +33,11 @@ public class MachineSwitch : MonoBehaviour
     public void ToggleSwitch()
     {
         isVisible = !isVisible;
+        if (MaterialChanger)
+            MaterialChanger.toggle = !MaterialChanger.toggle;
+        if (PrefabChanger)
+            PrefabChanger.toggle = !PrefabChanger.toggle;
+        
         OnButtonPressed?.Invoke(isVisible);
     }
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028349, g: 0.22571358, b: 0.3069225, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -179,6 +179,10 @@ PrefabInstance:
       propertyPath: isVisible
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7910112652744618938, guid: 2af7205b1101fc5408efb4fe9fe7fb66, type: 3}
+      propertyPath: MaterialChanger
+      value: 
+      objectReference: {fileID: 1968474650}
     - target: {fileID: 7910112652744618938, guid: 2af7205b1101fc5408efb4fe9fe7fb66, type: 3}
       propertyPath: OnButtonPressed.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -971,7 +975,7 @@ MonoBehaviour:
   numToSpawn: 100
   spawnInterval: 1
   spawnOffset: {x: 0, y: 0, z: 0}
-  isRunning: 1
+  isRunning: 0
 --- !u!1 &385714688
 GameObject:
   m_ObjectHideFlags: 0
@@ -1434,7 +1438,19 @@ MonoBehaviour:
   distanceThreshold: 0.1
   OnButtonPressed:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1762247661}
+        m_TargetAssemblyTypeName: MachineSwitch, Assembly-CSharp
+        m_MethodName: ToggleSwitch
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   isStart: 0
 --- !u!65 &475775474
 BoxCollider:
@@ -3634,9 +3650,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 614055425}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 0
+        m_TargetAssemblyTypeName: MachineSwitch, Assembly-CSharp
+        m_MethodName: ToggleSwitch
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4635,6 +4651,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3282029263655771826, guid: 885ecae56b16f13428a67de5ae482a72, type: 3}
   m_PrefabInstance: {fileID: 1671951509}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1762247661 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7910112652744618938, guid: 2af7205b1101fc5408efb4fe9fe7fb66, type: 3}
+  m_PrefabInstance: {fileID: 7370600}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db65942638d9485449185789eb4dd001, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1766653681
 GameObject:
   m_ObjectHideFlags: 0
@@ -5809,6 +5836,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Scanner2
       objectReference: {fileID: 0}
+    - target: {fileID: 601362243300495996, guid: 2af7205b1101fc5408efb4fe9fe7fb66, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5343105448359487696, guid: 2af7205b1101fc5408efb4fe9fe7fb66, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -5861,6 +5892,10 @@ PrefabInstance:
       propertyPath: isVisible
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7910112652744618938, guid: 2af7205b1101fc5408efb4fe9fe7fb66, type: 3}
+      propertyPath: PrefabChanger
+      value: 
+      objectReference: {fileID: 554218049}
     - target: {fileID: 7910112652744618938, guid: 2af7205b1101fc5408efb4fe9fe7fb66, type: 3}
       propertyPath: OnButtonPressed.m_PersistentCalls.m_Calls.Array.size
       value: 1

@@ -54,6 +54,7 @@ public class ProductionLinker : MonoBehaviour
             yield return StartCoroutine(apiService.GetMachineData1((MachineData data) =>
             {
                 machineDataReffrence = data;
+                Debug.Log("TAG MACHINE " + machineDataReffrence);
                 Debug.Log(data.batches);  
             }));
             yield return new WaitForSeconds(30);
@@ -83,16 +84,17 @@ public class ProductionLinker : MonoBehaviour
         if (machineDataReffrence != null && machineDataReffrence.statusCode != null)
         {
             Debug.Log("TAG machineDataReffrence.statusCode.statusDescription " + machineDataReffrence.statusCode.statusDescription);
-            if (machineDataReffrence.statusCode.statusDescription.Equals("Aktiv"))
-            {
+            //if (machineDataReffrence.statusCode.statusDescription.Equals("stopped")) //MIDLIERTIDIGT
+            //{
                 spawner.numToSpawn = machineDataReffrence.batches[0].producedItems;
-                spawner.ToggleRunning(machineDataReffrence.machineRunning);
+                //spawner.ToggleRunning(machineDataReffrence.machineRunning);
+                spawner.ToggleRunning(true);
                 spawner.spawnInterval = (float)CalculateSpawnInterval();
-            }
-            else
-            {
-                Debug.Log("TAG MachineDataReffrence is null");
-            }
+            //}
+            //else
+            //{
+            //    Debug.Log("TAG MachineDataReffrence is null");
+            //}
         }
     }
 

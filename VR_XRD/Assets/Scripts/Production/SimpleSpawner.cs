@@ -9,39 +9,35 @@ public class SimpleSpawner : MonoBehaviour
     public float spawnInterval = 1.0f;
     public Vector3 spawnOffset = new Vector3(0, 0, 0);
     public bool isRunning = false;
-
-    private float timeSinceLastSpawn;
-
-    private void Start()
-    {
-        timeSinceLastSpawn = 0;
-    }
-
-    private void Update()
-    {
-        if (isRunning)
-        {
-            timeSinceLastSpawn += Time.deltaTime;
-
-            if (timeSinceLastSpawn >= spawnInterval)
-            {
-                SpawnObjects();
-                timeSinceLastSpawn = 0;
-            }
-        }
-    }
-
-    private void SpawnObjects()
-    {
-        for (int i = 0; i < numToSpawn; i++)
-        {
-            Vector3 spawnPosition = transform.position + spawnOffset * i;
-            Instantiate(SpawnThing, spawnPosition, Quaternion.identity);
-        }
-    }
+    private Coroutine _spawnerCoroutine;
 
     public void ToggleRunning(bool run)
     {
+        Debug.Log("TAG ToggleRunning");
         isRunning = run;
+        if (isRunning)
+        {
+            Debug.Log("TAG Inside toggle" + isRunning);
+            _spawnerCoroutine = StartCoroutine(Spawner());
+        }
+        else
+        {
+            StopCoroutine(_spawnerCoroutine);
+        }
+    }
+
+    private IEnumerator Spawner()
+    {
+        while (isRunning)
+        {
+            for (int i = 0; i < numToSpawn; i++)
+            {
+                Vector3 spawnPosition = transform.position + spawnOffset * i;
+                Instantiate(SpawnThing, spawnPosition, Quaternion.identity);
+                yield return new WaitForSeconds(spawnInterval);
+            }
+
+            yield return null;
+        }
     }
 }
