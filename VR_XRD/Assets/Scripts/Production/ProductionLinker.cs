@@ -16,17 +16,13 @@ public class ProductionLinker : MonoBehaviour
 
     private MachineData machineDataReffrence = null;
 
-
     public bool isRunning = false; //Should be toggable though the machine buttons
     private float calculateSpawnInterval;
-
-
 
     // Start is called before the first frame update
     void Start()
     {
         ToggleRunning(isRunning);
-        
     }
 
     public void ToggleRunning(bool run)
@@ -51,12 +47,6 @@ public class ProductionLinker : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private IEnumerator FetchMachine()
     {
         while(isRunning){
@@ -66,48 +56,44 @@ public class ProductionLinker : MonoBehaviour
                 machineDataReffrence = data;
                 Debug.Log(data.batches);  
             }));
-            yield return new WaitForSecondsRealtime(30);
+            yield return new WaitForSeconds(30);
         }
     }
-     private double CalculateSpawnInterval()
+    
+    private double CalculateSpawnInterval()
       {
-          var startTime = machineDataReffrence.batches[0].startTime;
-            var endTime = machineDataReffrence.batches[0].endTime;
-    var producedItems = machineDataReffrence.batches[0].producedItems;
-    if (producedItems <= 0)
-    {
-        throw new InvalidOperationException("producedItems must be greater than zero.");
-    }
-    TimeSpan interval = endTime - startTime;
-    var totalSeconds = interval.TotalSeconds;
-    var calculatedSpawnInterval = totalSeconds / producedItems;
-    Debug.Log(calculatedSpawnInterval);
-    return calculatedSpawnInterval;
+        var startTime = machineDataReffrence.batches[0].startTime;
+        var endTime = machineDataReffrence.batches[0].endTime;
+        var producedItems = machineDataReffrence.batches[0].producedItems;
+        if (producedItems <= 0)
+        {
+            throw new InvalidOperationException("producedItems must be greater than zero.");
+        }
+        TimeSpan interval = endTime - startTime;
+        var totalSeconds = interval.TotalSeconds;
+        var calculatedSpawnInterval = totalSeconds / producedItems;
+        Debug.Log(calculatedSpawnInterval);
+        
+        return calculatedSpawnInterval;
     }
 
 
-private void UpdateMachine()
+    private void UpdateMachine()
     {
         if (machineDataReffrence != null && machineDataReffrence.statusCode != null)
         {
-        Debug.Log("TAG machineDataReffrence.statusCode.statusDescription" + machineDataReffrence.statusCode.statusDescription);
-        if (machineDataReffrence.statusCode.statusDescription.Equals("Aktiv"))
-        {
-        spawner.numToSpawn = machineDataReffrence.batches[0].producedItems;
-        spawner.ToggleRunning(machineDataReffrence.machineRunning);
-        spawner.spawnInterval = (float)CalculateSpawnInterval();
+            Debug.Log("TAG machineDataReffrence.statusCode.statusDescription " + machineDataReffrence.statusCode.statusDescription);
+            if (machineDataReffrence.statusCode.statusDescription.Equals("Aktiv"))
+            {
+                spawner.numToSpawn = machineDataReffrence.batches[0].producedItems;
+                spawner.ToggleRunning(machineDataReffrence.machineRunning);
+                spawner.spawnInterval = (float)CalculateSpawnInterval();
+            }
+            else
+            {
+                Debug.Log("TAG MachineDataReffrence is null");
+            }
         }
-        else
-        {
-            Debug.Log("TAG MachineDataReffrence is null");
-        }
-
-        }
-       
-        //Display function
-    
-    
-    
     }
 
     public MachineData GetMachineData() {

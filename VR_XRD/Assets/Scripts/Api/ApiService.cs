@@ -36,6 +36,7 @@ public class ApiService : MonoBehaviour
                 Debug.Log("Raw responseData: " + responseData);
 
                 MachineData machineData = JsonConvert.DeserializeObject<MachineData>(responseData);
+                Debug.Log("TAG After JSON");
                 TestApi(machineData);
 
                 // Handle the data or return it as needed.'
