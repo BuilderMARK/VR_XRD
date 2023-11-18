@@ -22,21 +22,39 @@ public class UIController : MonoBehaviour
     void Update()
     {
         MachineData machineData = productionLinker.GetMachineData();
+
+
+        /* Used for testing UI
+
+        machineData = new MachineData();
+        machineData.machineName = "Morten";
+        machineData.machineID = 99;
+
+        Batch batch = new Batch();
+        machineData.currentBatch = batch;
+
+        machineData.currentBatch.batchNo = 99;
+        machineData.currentBatch.startTime = new System.DateTime();
+        machineData.currentBatch.endTime = new System.DateTime();
+        machineData.currentBatch.producedItems = 99;
+        machineData.machineRunning = true;
+        */
+
         if (machineData != null)
         {
-            machineText.SetText("Machine " + machineData.machineName + " - " + machineData.machineID);
+            machineText.SetText("Machine: " + machineData.machineName + " - " + machineData.machineID);
 
             string machineInfoString = "";
-            machineInfoString += "Batch: " + machineData.currentBatch.batchNo + "\b";
-            machineInfoString += "Batch start: " + machineData.currentBatch.startTime + "\b";
-            machineInfoString += "Batch end: " + machineData.currentBatch.endTime + "\b";
-            machineInfoString += "Batch size: " + machineData.currentBatch.producedItems + "\b";
-            machineInfoString += "\b";
+            machineInfoString += "Batch: " + machineData.currentBatch.batchNo + "<br>";
+            machineInfoString += "Batch start: " + machineData.currentBatch.startTime + "<br>";
+            machineInfoString += "Batch end: " + machineData.currentBatch.endTime + "<br>";
+            machineInfoString += "Batch size: " + machineData.currentBatch.producedItems + "<br>";
+            machineInfoString += "<br>";
 
             if (machineData.machineRunning) {
-                machineInfoString += "Status: Machine is running";
+                machineInfoString += "Machine is running";
             } else {
-                machineInfoString += "Status: Machine is stopped";
+                machineInfoString += "Machine is stopped";
             }
 
             machineInfoText.SetText(machineInfoString);
