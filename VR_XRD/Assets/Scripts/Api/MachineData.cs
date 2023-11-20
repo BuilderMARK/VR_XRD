@@ -22,11 +22,8 @@ public class Batch
 {
     public int batchNo { get; set; }
     public int machineId { get; set; }
-   
     public int producedItems { get; set; }
-  
     public DateTime startTime { get; set; }
-
     public DateTime endTime { get; set; }
 }
 

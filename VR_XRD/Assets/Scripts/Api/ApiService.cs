@@ -14,16 +14,8 @@ public class ApiService : MonoBehaviour
     private string apiUrl = "https://via-bp-backend-delegator-bb6352f3951c.herokuapp.com/getMachine?id=1";
     public string authToken;
 
-    public async void Start()
-    {
-        //var machineData = await GetMachineData();
-        // Handle machineData if necessary
-    }
-
     public IEnumerator GetMachineData1(Action<MachineData> callback)
     {
-        Debug.Log("API has been called from the API service");
-
         using (UnityWebRequest www = UnityWebRequest.Get(apiUrl))
         {
             www.SetRequestHeader("Authorization", "Bearer " + authToken);
@@ -33,13 +25,8 @@ public class ApiService : MonoBehaviour
             if (www.result == UnityWebRequest.Result.Success)
             {
                 string responseData = www.downloadHandler.text;
-                Debug.Log("Raw responseData: " + responseData);
-
                 MachineData machineData = JsonConvert.DeserializeObject<MachineData>(responseData);
-                Debug.Log("TAG After JSON");
                 TestApi(machineData);
-
-                // Handle the data or return it as needed.'
                 callback(machineData);
             }
             else

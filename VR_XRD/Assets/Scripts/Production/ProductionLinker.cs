@@ -5,21 +5,15 @@ using UnityEngine;
 
 public class ProductionLinker : MonoBehaviour
 {
-
-
     public ApiService apiService;
     public SimpleSpawner spawner;
     public DisplayScript display;
     private int test = 1;
-    private bool isInvoking = false; //New variable to track InvokeRepeating
-
-
+    private bool isInvoking = false;
     private MachineData machineDataReffrence = null;
-
     public bool isRunning = false; //Should be toggable though the machine buttons
     private float calculateSpawnInterval;
 
-    // Start is called before the first frame update
     void Start()
     {
         ToggleRunning(isRunning);
@@ -30,7 +24,7 @@ public class ProductionLinker : MonoBehaviour
         isRunning = run;
         if (isRunning)
         {
-            if (!isInvoking) //Check if InvokeRepeating has been called
+            if (!isInvoking) 
             {
                 StartCoroutine(FetchMachine());
                 //InvokeRepeating("FetchMachine", 1.0f, 3.0f);
@@ -41,7 +35,6 @@ public class ProductionLinker : MonoBehaviour
         else
         {
             StopCoroutine(FetchMachine());
-            //CancelInvoke("FetchMachine");
             CancelInvoke("UpdateMachine");
             isInvoking = false; //Set isInvoking back to false after calling CancelInvoke
         }
@@ -84,7 +77,9 @@ public class ProductionLinker : MonoBehaviour
         if (machineDataReffrence != null && machineDataReffrence.statusCode != null)
         {
             Debug.Log("TAG machineDataReffrence.statusCode.statusDescription " + machineDataReffrence.statusCode.statusDescription);
-            //if (machineDataReffrence.statusCode.statusDescription.Equals("stopped")) //MIDLIERTIDIGT
+            //Udkommenteret for demo, men logikken er rigtig i praktsis!
+            
+            //if (machineDataReffrence.statusCode.statusDescription.Equals("stopped"))
             //{
                 spawner.numToSpawn = machineDataReffrence.batches[0].producedItems;
                 //spawner.ToggleRunning(machineDataReffrence.machineRunning);
