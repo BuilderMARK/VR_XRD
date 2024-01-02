@@ -1,2 +1,2 @@
 # VR_XRD
-We making VR APPPPPP
+We making VR APP
